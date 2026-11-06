@@ -1,0 +1,163 @@
+Here are the SQL statements to answer each question based on the test paper shown in the image:
+
+---
+
+### **a) Create a view labelled `viewA`, to retrieve the employees whose name starts with letter 'S'**
+
+```sql
+CREATE VIEW viewA AS
+SELECT * 
+FROM EMPLOYEE 
+WHERE EName LIKE 'S%';
+
+```
+
+---
+
+### **b) Create a View labelled `viewB`, to retrieve all details of employees that don't belong to Dno 20**
+
+```sql
+CREATE VIEW viewB AS
+SELECT * 
+FROM EMPLOYEE 
+WHERE Dno <> 20;
+
+```
+
+---
+
+### **c) Create a view labelled `viewC`, to retrieve the employees having a salaries in the range of 40000 to 60000**
+
+```sql
+CREATE VIEW viewC AS
+SELECT * 
+FROM EMPLOYEE 
+WHERE Salary BETWEEN 40000 AND 60000;
+
+```
+
+---
+
+### **d) Create a view labelled `viewD`, to retrieve how much is spent on managers, the number of managers and utmost paid manager**
+
+```sql
+CREATE VIEW viewD AS
+SELECT 
+    SUM(Salary) AS Total_Spent_On_Managers,
+    COUNT(*) AS Number_Of_Managers,
+    MAX(Salary) AS Highest_Paid_Manager
+FROM EMPLOYEE
+WHERE Job = 'Manager';
+
+```
+
+---
+
+### **e) Create a view labelled `viewE`, to retrieve the last two columns and rows from the employee table**
+
+*(Assuming MySQL syntax using subqueries and `LIMIT`)*
+
+```sql
+CREATE VIEW viewE AS
+SELECT Salary, Dno 
+FROM (
+    SELECT Salary, Dno 
+    FROM EMPLOYEE 
+    ORDER BY Empno DESC 
+    LIMIT 2
+) AS sub
+ORDER BY Empno ASC;
+
+```
+
+---
+
+### **f) Create a view labelled `viewF`, to re-arrange the Job in chronological order, and the respective salaries of those jobs. The salaries should be from highest to lowest per job**
+
+```sql
+CREATE VIEW viewF AS
+SELECT Job, Salary 
+FROM EMPLOYEE 
+ORDER BY Job ASC, Salary DESC;
+
+```
+
+---
+
+### **g) Create a viewG, to retrieve employees having a salary more than 40000**
+
+```sql
+CREATE VIEW viewG AS
+SELECT * 
+FROM EMPLOYEE 
+WHERE Salary > 40000;
+
+```
+
+---
+
+### **h) Change the size of the column `EName` to accommodate 40 characters**
+
+```sql
+ALTER TABLE EMPLOYEE 
+MODIFY COLUMN EName VARCHAR(40);
+
+```
+
+---
+
+### **i) Add a new column to the Employee table, the column name is Residence**
+
+```sql
+ALTER TABLE EMPLOYEE 
+ADD COLUMN Residence VARCHAR(50);
+
+```
+
+---
+
+### **j) Insert a record in the Employee table. `Empno='e004'`, `Ename='Jane'` and `Job='Teacher'**`
+
+```sql
+INSERT INTO EMPLOYEE (Empno, EName, Job) 
+VALUES ('e004', 'Jane', 'Teacher');
+
+```
+
+---
+
+### **k) Modify the records of E004 to have a `Job='Engineer'` and their salary should be increased by 10% of the original salary**
+
+```sql
+UPDATE EMPLOYEE 
+SET Job = 'Engineer', 
+    Salary = Salary * 1.10 
+WHERE Empno = 'e004';
+
+```
+
+---
+
+### **l) Eliminate the last row from the employee table**
+
+```sql
+DELETE FROM EMPLOYEE 
+ORDER BY Empno DESC 
+LIMIT 1;
+
+```
+
+---
+
+### **m) Create another table of your choice with a minimum of three columns in the Human resource database and append a foreign key on the created table**
+
+```sql
+CREATE TABLE DEPARTMENT (
+    DeptID INT PRIMARY KEY,
+    DeptName VARCHAR(50) NOT NULL,
+    Location VARCHAR(50),
+    Empno VARCHAR(10),
+    FOREIGN KEY (Empno) REFERENCES EMPLOYEE(Empno)
+);
+
+```

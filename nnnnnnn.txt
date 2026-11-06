@@ -1,0 +1,93 @@
+CREATE VIEW viewA AS
+SELECT * FROM Employees
+WHERE Ename LIKE 'S%';
+
+SELECT* FROM viewA;
+
+CREATE VIEW viewB AS SELECT
+SELECT*FROM Employees
+WHERE DeptNo != 20;
+
+SELECT* FROM viewB;
+
+
+CREATE VIEW viewC AS 
+SELECT * FROM Employees
+WHERE Salary BETWEEN 40000 AND 60000;
+
+SELECT* FROM viewC;
+
+
+CREATE VIEW viewD AS 
+SELECT  SUM(Salary), COUNT(*), MAX(Salary) FROM Employees
+WHERE Job = 'Manager';
+
+SELECT* FROM viewD;
+
+CREATE VIEW viewE AS 
+SELECT COLUMN ('Salary' ,'DeptNo')
+FROM Employees;
+
+
+SELECT* FROM viewE;
+
+
+CREATE VIEW viewF AS 
+SELECT Job, Salary FROM Employees
+ORDER BY Salary DESC;
+
+
+SELECT* FROM viewF;
+
+
+CREATE VIEW viewG AS 
+SELECT * FROM Employees
+HAVING  Salary>40000;
+
+SELECT* FROM viewG;
+
+
+ALTER TABLE Employees
+MODIFY COLUMN Ename VARCHAR(40);
+SELECT*FROM Employees;
+
+
+ALTER TABLE Employees
+ADD COLUMN Residence VARCHAR(20);
+SELECT*FROM Employees;
+
+INSERT INTO Employees VALUES
+('E009','Jane and Job','Teacher');
+SELECT*FROM Employees;
+
+UPDATE Employees
+SET Job='Engineer',Salary= Salary*1.10
+
+WHERE EmpNo='E004';
+
+SELECT*FROM Employees;
+
+DELETE FROM Employees
+ WHERE EmpNo='E007';
+
+ SELECT*FROM Employees;
+
+
+ DROP TABLE IF EXISTS Managers;
+
+ 
+CREATE TABLE Managers(
+    EmpNo VARCHAR(15) PRIMARY KEY,
+    Ename VARCHAR(20),
+     Age INT
+     Salary Decimal(10,0) FOREIGN KEY
+    
+);
+
+INSERT INTO Managers VALUES
+('E010','Nahirya',35,30000),
+('E011','Naava',30,40000),
+('E012','Tendo',25,50000),
+('E013','Dianah',23,60000);
+
+SELECT * FROM Managers;
